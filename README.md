@@ -319,3 +319,6 @@ _mysql> alter table ticket add foreign key (tid) references train(tid);_
 # IntercityExpress PART II
 
 _I have Completed the PART II of the Assignment by solving Set C_  
+
+**_For Question No. 1 of Set C:_**
+
