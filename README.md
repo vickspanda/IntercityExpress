@@ -1,9 +1,9 @@
 # IntercityExpress PART I
 
-**The PART I Project has been done by G10**
-**_Vikas Sharma (23112042)_**
-**_Rugved Ajit Patil (23112026)_**
-**_Onkar Deepak Gangurde (23112010)_**
+**The PART I Project has been done by G10**  
+**_Vikas Sharma (23112042)_**  
+**_Rugved Ajit Patil (23112026)_**  
+**_Onkar Deepak Gangurde (23112010)_**  
 
 **The Distribution for the PART I is as Follows:**  
 _ER Diagram was initially drawn by each member of the group and after the common discussion we concluded to the attached ER Diagram below:_  
