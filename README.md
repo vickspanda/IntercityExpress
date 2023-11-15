@@ -1,3 +1,10 @@
+# Intercity Express  
+
+**This Repository contains both PART I and PART II of the Intercity Express Assignment**  
+**_Name: Vikas Sharma_**  
+**_Roll No.: 23112042_**  
+**_Group No.: G10_**  
+
 # IntercityExpress PART I
 
 **The PART I Project has been done by G10**  
@@ -308,7 +315,7 @@ _mysql> alter table station add foreign key (sid) references schedule(sid);_
 _**For table ticket:**_  
 _mysql> alter table ticket add foreign key (rid) references route(rid);_  
 
-_**For table train:**_
+_**For table train:**_  
 _mysql> alter table train add foreign key (mid) references maintenance(mid);_  
 
 _**For table standby:**_  
@@ -318,7 +325,55 @@ _mysql> alter table ticket add foreign key (tid) references train(tid);_
 
 # IntercityExpress PART II
 
-_I have Completed the PART II of the Assignment by solving Set C_  
+_I have Completed the PART II of the Assignment by solving Set C of the Assignment_  
 
-**_For Question No. 1 of Set C:_**
+**_For Question No. 1 of Set C:_**  
+_mysql> SELECT *  
+    -> FROM Train  
+    -> WHERE tid NOT IN (  
+    -> SELECT DISTINCT T.tid  
+    -> FROM Train T  
+    -> LEFT JOIN Schedule S ON T.tid = S.tid  
+    -> WHERE S.date = '2023-10-10'  
+    -> );_  
+    
+**_For Question No. 2 of Set C:_**  
+_mysql> SELECT T.*, COUNT(*) AS MonthlySeatsSold  
+    -> FROM Train T  
+    -> INNER JOIN Schedule S ON T.tid = S.tid  
+    -> INNER JOIN Route R ON S.rid = R.rid  
+    -> INNER JOIN Booking B ON S.sid = B.sid  
+    -> WHERE R.start_station = 'Dharwad' AND R.end_station = 'Bengaluru'  
+    -> AND B.date BETWEEN '2023-10-01' AND '2023-10-31'  
+    -> GROUP BY T.tid  
+    -> ORDER BY MonthlySeatsSold ASC;_  
 
+**_For Question No. 3 of Set C:_**  
+_mysql> SELECT R.*, COUNT(*) AS NumBookings  
+    -> FROM Route R  
+    -> INNER JOIN Schedule S ON R.rid = S.rid  
+    -> INNER JOIN Train T ON S.tid = T.tid  
+    -> INNER JOIN Booking B  ON T.tid = B.tid  
+    -> WHERE T.tid IN (  
+    -> SELECT tid  
+    -> FROM Train  
+    -> WHERE T.tid = B.tid  
+    -> )  
+    -> GROUP BY R.rid  
+    -> ORDER BY NumBookings DESC  
+    -> LIMIT 1;_  
+
+**_For Question No. 4 of Set C:_**  
+_mysql> SELECT P.*  
+    -> FROM passenger P  
+    -> WHERE P.pid IN (  
+    -> SELECT B.pid  
+    -> FROM booking B  
+    -> INNER JOIN schedule S ON B.sid = S.sid  
+    -> INNER JOIN train T ON S.tid = T.tid  
+    -> WHERE T.tid = B.tid  
+    -> GROUP BY B.pid  
+    -> HAVING COUNT(*) >= 3  
+    -> );_  
+
+    _**End of the Assignment**_
