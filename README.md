@@ -12,6 +12,14 @@ _The Relational Schemas was designed by three of us on the same day when we fina
 
 _And the creation of database was also performed by three of us individually on our personnel computers and after getting the errors we jot them down and discussed them on another group meet_  
 
+_In our project, we have 12 tables, for them each of us selected four tables to get the sample data prepared for database_  
+
+_For PART II of the Project, We have distributed the Sets as follows:_  
+_Set A: Rugved Ajit Patil (23112026)_  
+_Set B: Onkar Deepak Gangurde (23112010)_  
+_Set C: Vikas Sharma (23112042)_  
+
+
 **For IntercityExpress Project, the ER Diagram is as follows:**
 
 Note: This ER Diagram is made using Lucidchart and paint.
@@ -307,3 +315,4 @@ _**For table standby:**_
 _mysql> alter table ticket add foreign key (station_id) references station(station_id);_  
 
 _mysql> alter table ticket add foreign key (tid) references train(tid);_  
+
