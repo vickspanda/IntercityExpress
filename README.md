@@ -376,4 +376,4 @@ _mysql> SELECT P.*
     -> HAVING COUNT(*) >= 3  
     -> );_  
 
-    _**End of the Assignment**_
+**_End of the Assignment_**
