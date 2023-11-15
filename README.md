@@ -316,3 +316,5 @@ _mysql> alter table ticket add foreign key (station_id) references station(stati
 
 _mysql> alter table ticket add foreign key (tid) references train(tid);_  
 
+# IntercityExpress PART II
+
