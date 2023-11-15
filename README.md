@@ -1,5 +1,22 @@
-# IntercityExpress
+# IntercityExpress PART I
 
+**The PART I Project has been done by G10**
+**_Vikas Sharma (23112042)_**
+**_Rugved Ajit Patil (23112026)_**
+**_Onkar Deepak Gangurde (23112010)_**
+
+**The Distribution for the PART I is as Follows:**  
+_ER Diagram was initially drawn by each member of the group and after the common discussion we concluded to the attached ER Diagram below:_  
+
+_The Relational Schemas was designed by three of us on the same day when we finalised the ER Diagram_  
+
+_And the creation of database was also performed by three of us individually on our personnel computers and after getting the errors we jot them down and discussed them on another group meet_  
+
+**For IntercityExpress Project, the ER Diagram is as follows:**
+
+Note: This ER Diagram is made using Lucidchart and paint.
+
+![ER_diagram](https://github.com/vickspanda/IntercityExpress/assets/116336028/0a62ee86-0335-4cd6-9abf-25b6e7194bfa)
 
 **For IntercityExpress Project, the Relational Schemas are as follows:**  
 
