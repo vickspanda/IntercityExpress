@@ -65,7 +65,7 @@ _mysql> create database IntercityExpress;_
 _mysql> use intercityexpress;_
 
 
-**Create table booking,**
+**create table booking,**
 
 _mysql> create table booking(_  
     _-> ticket_id varchar(10),_  
@@ -74,7 +74,7 @@ _mysql> create table booking(_
     _-> discount int,_  
    _-> final_price);_  
 
-**Load booking.csv file,**
+**load booking.csv file,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/booking.csv'  
     -> into table booking  
@@ -82,14 +82,14 @@ _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/booking.
     -> lines terminated by '\n'  
     -> ignore 1 lines;_  
 	
-**Create table goes_through,**
+**create table goes_through,**
 
 _mysql> create table goes_through(  
     -> tid varchar(10),  
     -> mt_id varchar(10),  
     -> date DATE);_  
 
-**Load goes_through.csv file,**
+**load goes_through.csv file,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/goes_through.csv'  
     -> into table goes_through  
@@ -97,14 +97,14 @@ _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/goes_thr
     -> lines terminated by '\n'  
     -> ignore 1 lines;_  
 
-**Create table passenger,**
+**create table passenger,**
 
 _mysql> create table passenger(  
     -> p_id varchar(10) primary key,  
     -> p_name varchar(50),  
     -> p_age int);_  
 
-**Load passenger.csv file,**
+**load passenger.csv file,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/passenger.csv'  
     -> into table passenger  
@@ -123,7 +123,7 @@ _mysql> create table route(
     -> departure_time TIME,  
     -> arrival_time TIME);;_  
 
- **Load route.csv file,**
+ **load route.csv file,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/route.csv'  
     -> into table route  
@@ -143,7 +143,7 @@ _mysql> create table schedule(
     -> driver varchar(10),  
     -> codriver varchar(10));_  
 
-**Load schedule.csv file,**
+**load schedule.csv file,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/schedule.csv'  
     -> into table schedule  
@@ -160,7 +160,7 @@ _mysql> create table staff(
     -> address varchar(50),  
     -> rest_days varchar(50));_  
 
-**Load staff.csv file into table staff,**
+**load staff.csv file into table staff,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/staff.csv'  
     -> into table staff  
@@ -175,7 +175,7 @@ _mysql> create table stand_by(
     -> t_id varchar(10));_  
 
 
-**Load stand_by.csv file into table stand_by,**
+**load stand_by.csv file into table stand_by,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/standby.csv'  
     -> into table stand_by  
@@ -190,7 +190,7 @@ _mysql> create table station(
     -> station_id varchar(10) primary key,  
     -> s_name varchar(50));_  
 
-**Load station.csv into table station,**
+**load station.csv into table station,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/station.csv'  
     -> into table station  
@@ -208,7 +208,7 @@ _mysql> create table ticket(
     -> r_id varchar(10));_  
 
 
-**Load ticket.csv into table ticket,**
+**load ticket.csv into table ticket,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ticket.csv'  
     -> into table ticket  
@@ -224,7 +224,7 @@ _mysql> create table train(
     -> milage int);_  
 
 
-**Load train.csv into table train,**
+**load train.csv into table train,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/train.csv'  
     -> into table train  
@@ -232,14 +232,14 @@ _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/train.cs
     -> lines terminated by '\r\n'  
     -> ignore 1 lines;_  
 
-**Create table travel_agent,**
+**create table travel_agent,**
 
 _mysql> create table travel_agent(  
     -> ta_id  varchar(10) primary  key,  
     -> ta_name  varchar(50),  
     -> commission int);_  
 
-**Load travel_agent.csv into table travel_agent,**
+**load travel_agent.csv into table travel_agent,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/travel_agent.csv'  
     -> into table travel_agent  
@@ -254,7 +254,7 @@ _mysql> create table connect(
     -> start_station varchar(10),  
     -> end_station varchar(10));_  
 
-**Load connects.csv file,**
+**load connects.csv file,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/connects.csv'  
     -> into table connect  
