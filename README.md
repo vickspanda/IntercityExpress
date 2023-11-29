@@ -39,20 +39,19 @@ Note: This ER Diagram is made using Lucidchart and paint.
 Note: Bold means Primary Key.  
      Itallic means Foreign Key.  
 
-1.	train (**t_id**, capacity, milage)
-2.	stand_by(_station_id_, _t_id_)
-3.	route (**r_id**, r_name, distance, time_taken, operation_days, arrival_time, departure_time)
-4.	connects (_r_id_, _start_station_, _end_station_)
-5.	schedule (**s_id**,_ r_id_, _t_id_, actual_departure_time, actual_arrival_time, date, _driver_, _co_driver_)
-6.	station (**station_id**, s_name)
-7.	staff (**staff_id**, st_name, contact_no, address, rest_days)
-8.	maintainance (**mt_id**, m_type)
-9.	goes_through (_t_id_, _mt_id_, date)
-10.	travel Agent (**ta_id**, ta_name, commission)
-11.	ticket (**ticket_id**, date, time, price, _r_id_)
-12.	booking (_ticket_id_, _ta_id_, _p_id_, discount, final_price)
-13.	passenger(**p_id**, p_name, p_age)
-
+1.	train (**t_id**, capacity, milage)  
+2.	stand_by(_station_id_, _t_id_)  
+3.	station (**station_id**, s_name)  
+4.	connects (_r_id_, _start_station_, _end_station_)  
+5.	goes_through (_t_id_, _mt_id_, date)  
+6.	maintainance (**mt_id**, m_type)  
+7.	schedule (**s_id**,_ r_id_, _t_id_, actual_departure_time, actual_arrival_time, date, _driver_, _co_driver_)  
+8.	route (**r_id**, r_name, distance, time_taken, operation_days, arrival_time, departure_time)
+9.	staff (**staff_id**, st_name, contact_no, address, rest_days)  
+10.	booking (_ticket_id_, _ta_id_, _p_id_, discount, final_price)  
+11.	travel Agent (**ta_id**, ta_name, commission)
+12.	passenger(**p_id**, p_name, p_age)  
+13.	ticket (**ticket_id**, date, time, price, _r_id_)  
 
 
 To implement these Schemas. we need to follow the following commands in Mysql Command Line Client or Mysql can be accessed using Command Line Prompt after giving command "mysql -u root -p"  :
