@@ -267,51 +267,41 @@ _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/connects
 **Now adding Foreign Key Constraints to the all tables as per the relational schemas by following these commands,**
 
 _**For table booking:**_  
-_mysql> alter table booking add foreign key (t_id) references train(t_id);_  
-
 _mysql> alter table booking add foreign key (ticket_id) references ticket(ticket_id);_  
 
 _mysql> alter table booking add foreign key (ta_id) references travel_agent(ta_id);_  
 
-_mysql> alter table booking add foreign key (pid) references passenger(pid);_  
+_mysql> alter table booking add foreign key (p_id) references passenger(p_id);_    
 
-_**For table daily_service:**_  
-_mysql> alter table daily_service add foreign key (sid) references schedule(sid);_  
+_**For table goes_through:**_  
+_mysql> alter table goes_through add foreign key (t_id) references train(t_id);_  
 
-_mysql> alter table daily_service add foreign key (rid) references route(rid);_  
+_mysql> alter table goes_through add foreign key (mt_id) references maintenance(mt_id); _  
 
-_mysql> alter table daily_service add foreign key (staff_id) references staff(staff_id);_  
+_**For table connect:**_  
+_mysql> alter table connect add foreign key (r_id) references route(r_id);_  
 
-_**For table maintenance:**_  
-_mysql> alter table maintenance add foreign key (tid) references train(tid);_  
+_mysql> alter table connect add foreign key (start_station) references station(station_id);_  
 
-_**For table route:**_  
-_mysql> alter table route add foreign key (driver) references staff(staff_id);_  
-
-_mysql> alter table route add foreign key (co_driver) references staff(staff_id);_  
-
-_mysql> alter table route add foreign key (start_station) references station(station_id);_  
-
-_mysql> alter table route add foreign key (end_station) references station(station_id);_  
+_mysql> alter table connect add foreign key (end_station) references station(station_id); _  
 
 _**For table schedule:**_  
-_mysql> alter table schedule add foreign key (rid) references route(rid);_  
+_mysql> alter table schedule add foreign key (r_id) references route(r_id);_  
 
-_mysql> alter table schedule add foreign key (tid) references train(tid);_  
+_mysql> alter table schedule add foreign key (t_id) references train(t_id);_  
 
-_**For table station:**_  
-_mysql> alter table station add foreign key (sid) references schedule(sid);_  
+_mysql> alter table schedule add foreign key (driver) references staff(staff_id);_  
+
+_mysql> alter table schedule add foreign key (codriver) references staff(staff_id);_   
+
+_**For table stand_by:**_  
+_mysql> alter table stand_by add foreign key (station_id) references station(station_id);_  
+
+_mysql> alter table stand_by add foreign key (t_id) references train(t_id);_  
 
 _**For table ticket:**_  
-_mysql> alter table ticket add foreign key (rid) references route(rid);_  
+_mysql> alter table ticket add foreign key (r_id) references route(r_id);_  
 
-_**For table train:**_  
-_mysql> alter table train add foreign key (mid) references maintenance(mid);_  
-
-_**For table standby:**_  
-_mysql> alter table ticket add foreign key (station_id) references station(station_id);_  
-
-_mysql> alter table ticket add foreign key (tid) references train(tid);_  
 
 # IntercityExpress PART II
 
