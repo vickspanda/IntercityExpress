@@ -29,7 +29,7 @@ _Set C: Vikas Sharma (23112042)_
 
 **For IntercityExpress Project, the ER Diagram is as follows:**
 
-Note: This ER Diagram is made using Lucidchart and paint.
+Note: This ER Diagram is made using Microsoft OneNote.
 
 ![er diagram](https://github.com/vickspanda/IntercityExpress/assets/116336028/2facb5fa-1866-4371-b757-6326681e6fff)
 
