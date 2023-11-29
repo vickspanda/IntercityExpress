@@ -19,7 +19,7 @@ _The Relational Schemas were designed by each three of us on the same day when w
 
 _And the creation of database was also performed by three of us individually on our personnel computers and after getting the errors we jot them down and discussed them on another group meet_  
 
-_In our project, we have 12 tables, for them each of us selected four tables to get the sample data prepared for database_  
+_In our project, we have 13 tables, for them each of us selected either four or five tables to get the sample data prepared for database_  
 
 _For PART II of the Project, We have distributed the Sets as follows:_  
 _Set A: Rugved Ajit Patil (23112026)_  
@@ -56,11 +56,11 @@ Note: Bold means Primary Key.
 
 To implement these Schemas. we need to follow the following commands in Mysql Command Line Client or Mysql can be accessed using Command Line Prompt after giving command "mysql -u root -p"  :
 
-**Create the Database,**
+**create the database,**
 
 _mysql> create database IntercityExpress;_
 
-**Select the Database,**
+**select the database,**
 
 _mysql> use intercityexpress;_
 
@@ -247,7 +247,7 @@ _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/travel_a
     -> lines terminated by '\r\n'  
     -> ignore 1 lines;;_  
 
- **Create table connect,**
+ **create table connect,**
 
 _mysql> create table connect(  
     -> r_id varchar(10),  
