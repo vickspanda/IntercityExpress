@@ -307,14 +307,7 @@ _mysql> alter table ticket add foreign key (r_id) references route(r_id);_
 _I have Completed the PART II of the Assignment by solving Set C of the Assignment_  
 
 **_For Question No. 1 of Set C:_**  
-_mysql> SELECT *  
-    -> FROM Train  
-    -> WHERE tid NOT IN (  
-    -> SELECT DISTINCT T.tid  
-    -> FROM Train T  
-    -> LEFT JOIN Schedule S ON T.tid = S.tid  
-    -> WHERE S.date = '2023-10-10'  
-    -> );_  
+_mysql> select * from train where t_id not in (select schedule.t_id from schedule, train where date='2023-10-10' and schedule.t_id = train.t_id);_  
     
 **_For Question No. 2 of Set C:_**  
 _mysql> SELECT T.*, COUNT(*) AS MonthlySeatsSold  
