@@ -31,25 +31,28 @@ _Set C: Vikas Sharma (23112042)_
 
 Note: This ER Diagram is made using Lucidchart and paint.
 
-![ER_diagram](https://github.com/vickspanda/IntercityExpress/assets/116336028/0a62ee86-0335-4cd6-9abf-25b6e7194bfa)
+![er diagram](https://github.com/vickspanda/IntercityExpress/assets/116336028/2facb5fa-1866-4371-b757-6326681e6fff)
+
 
 **For IntercityExpress Project, the Relational Schemas are as follows:**  
 
 Note: Bold means Primary Key.  
      Itallic means Foreign Key.  
 
-1.	train (**tid**, capacity, milage, _mid_)  
-2.	standby (_station_id_, _tid_)  
-3.	route ( **r_id**, r_name, distance, time_taken, operation_days, _start_station_, _end_station_, _driver_, _co_driver_)  
-4.	schedule (**sid**, _r_id_,_ tid_, departure_time, arrival_time, date)  
-5.	station (**station_id**, _sid_, s_name, actual_departure, actual_arrival)  
-6.	staff (**staff_id**, st_name, contact no, address, rest_day)  
-7.	maintenance (**mid**, _tid_, m_type, date)  
-8.	travel_agent ( **ta_id**, ta_name, commission)  
-9.	ticket (**ticket_id**, date, time, price,_ rid_)  
-10.	booking (_tid_, _ticket_id_, _ta_id_, _p_id_, discount, final_price)  
-11.	passenger (**p_id**, p_name, p_age)
-12.	daily_services( _sid, r_id_)
+1.	train (**t_id**, capacity, milage)
+2.	stand_by(_station_id_, _t_id_)
+3.	route (**r_id**, r_name, distance, time_taken, operation_days, arrival_time, departure_time)
+4.	connects (_r_id_, _start_station_, _end_station_)
+5.	schedule (**s_id**,_ r_id_, _t_id_, actual_departure_time, actual_arrival_time, date, _driver_, _co_driver_)
+6.	station (**station_id**, s_name)
+7.	staff (**staff_id**, st_name, contact_no, address, rest_days)
+8.	maintainance (**mt_id**, m_type)
+9.	goes_through (_t_id_, _mt_id_, date)
+10.	travel Agent (**ta_id**, ta_name, commission)
+11.	ticket (**ticket_id**, date, time, price, _r_id_)
+12.	booking (_ticket_id_, _ta_id_, _p_id_, discount, final_price)
+13.	passenger(**p_id**, p_name, p_age)
+
 
 
 To implement these Schemas. we need to follow the following commands in Mysql Command Line Client or Mysql can be accessed using Command Line Prompt after giving command "mysql -u root -p"  :
@@ -63,88 +66,89 @@ _mysql> create database IntercityExpress;_
 _mysql> use intercityexpress;_
 
 
-**Create table train,**
+**Create table booking,**
 
-_mysql> create table train (tid varchar(10) primary key, capacity int, milage varchar(10), mid varchar(10));_
+_mysql> create table booking(_  
+    _-> ticket_id varchar(10),_  
+    _-> ta_id varchar(10),_  
+    _-> p_id varchar(10),_  
+    _-> discount int,_  
+   _-> final_price);_  
 
-**Load train.csv file,**
+**Load booking.csv file,**
 
-_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/train.csv'  
-    -> into table train  
+_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/booking.csv'  
+    -> into table booking  
     -> fields terminated by ','  
     -> lines terminated by '\n'  
     -> ignore 1 lines;_  
 	
-**Create table standby,**
+**Create table goes_through,**
 
-_mysql> CREATE TABLE standby (  
-    ->     station_id varchar(10),  
-    ->     tid varchar(10),   
-    -> );_  
+_mysql> create table goes_through(  
+    -> tid varchar(10),  
+    -> mt_id varchar(10),  
+    -> date DATE);_  
 
-**Load route.csv file,**
+**Load goes_through.csv file,**
 
-_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/standby.csv'  
-    -> into table standby  
-    -> fields terminated by ','  
+_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/goes_through.csv'  
+    -> into table goes_through  
+    -> fields terminated  by ','  
     -> lines terminated by '\n'  
     -> ignore 1 lines;_  
 
-**Create table route,**
+**Create table passenger,**
 
-_mysql> CREATE TABLE route (  
-    ->     r_id varchar(10) primary key,  
-    ->     r_name varchar(50),  
-    ->     distance int,  
-    ->     time_taken TIME,  
-    ->     operation_days varchar(100),  
-    ->     start_station varchar(20),  
-    ->     end_station varchar(20),  
-    ->     driver varchar(20),  
-    ->     co_driver varchar(20)  
-    -> );_  
+_mysql> create table passenger(  
+    -> p_id varchar(10) primary key,  
+    -> p_name varchar(50),  
+    -> p_age int);_  
 
-**Load route.csv file,**
+**Load passenger.csv file,**
+
+_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/passenger.csv'  
+    -> into table passenger  
+    -> fields terminated  by ','  
+    -> lines terminated by '\n'  
+    -> ignore 1 lines;_  
+
+**create table route,**   
+
+_mysql> create table route(  
+    -> r_id varchar(10) primary key,  
+    -> r_name varchar(50),  
+    -> distance int,  
+    -> time_taken TIME,  
+    -> operation_days varchar(50),  
+    -> departure_time TIME,  
+    -> arrival_time TIME);;_  
+
+ **Load route.csv file,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/route.csv'  
     -> into table route  
-    -> fields terminated by ','  
+    -> fields terminated  by ','  
     -> lines terminated by '\n'  
     -> ignore 1 lines;_  
 
-**create table schedule,**   
+**create table schedule,**  
 
 _mysql> create table schedule(  
-    -> sid varchar(50) primary key,  
-    -> r_id varchar(50),  
-    -> tid varchar(50),  
-    -> departure_time time,  
-    -> arrival_time time,  
-    -> date DATE  
-    -> );_  
+    -> s_id varchar(10) primary key,  
+    -> r_id varchar(10),  
+    -> t_id varchar(10),  
+    -> actual_departure_time TIME,  
+    -> actual_arrival_time TIME,  
+    -> date DATE,  
+    -> driver varchar(10),  
+    -> codriver varchar(10));_  
 
- **Load schedule.csv file,**
+**Load schedule.csv file,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/schedule.csv'  
-    -> into table schedule    
-    -> fields terminated by ','  
-    -> lines terminated by '\n'  
-    -> ignore 1 lines;_  
-
-**create table station,**  
-
-_mysql> create table station(  
-    -> station_id varchar(50) primary key,  
-    -> sid varchar(50),  
-    -> s_name varchar(50),  
-    -> actual_departure time,  
-    -> actual_arrival time);_  
-
-**Load station.csv file,**
-
-_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/station.csv'  
-    -> into table station  
-    -> fields terminated by ','  
+    -> into table schedule  
+    -> fields terminated  by ','  
     -> lines terminated by '\n'  
     -> ignore 1 lines;_  
 	
@@ -152,64 +156,57 @@ _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/station.
 
 _mysql> create table staff(  
     -> staff_id varchar(10) primary key,  
-    -> st_name varchar(30),  
-    -> contact_no bigint,  
-    -> address varchar(200),  
-    -> rest_day varchar(100)  
-    -> );_  
+    -> staff_name varchar(50),  
+    -> contact_no int,  
+    -> address varchar(50),  
+    -> rest_days varchar(50));_  
 
 **Load staff.csv file into table staff,**
 
 _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/staff.csv'  
     -> into table staff  
-    -> fields terminated by ','  
+    -> fields terminated  by ','  
     -> lines terminated by '\n'  
     -> ignore 1 lines;_  
 
-**create table maintainance,**
+**create table stand_by,**
 
-_mysql> create table maintainance(  
-    -> mid varchar(10) primary key,  
-    -> tid varchar(10),  
-    -> m_type varchar(40),  
-    -> date DATE  
-    -> );_  
+_mysql> create table stand_by(  
+    -> station_id varchar(10),  
+    -> t_id varchar(10));_  
 
 
-**Load staff.csv file into table maintenance,**
+**Load stand_by.csv file into table stand_by,**
 
-_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/maintenance.csv'  
-    -> into table maintenance  
-    -> fields terminated by ','  
-    -> lines terminated by '\n'  
+_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/standby.csv'  
+    -> into table stand_by  
+    -> fields terminated  by ','  
+    -> lines terminated by '\r\n'  
     -> ignore 1 lines;_  
 
 
-**create table travel_agent,**
+**create table station,**
 
-_mysql> create table travel_agent(  
-    -> ta_id varchar(10) primary key,  
-    -> ta_name varchar(30),  
-    -> commission int  
-    -> );_  
+_mysql> create table station(  
+    -> station_id varchar(10) primary key,  
+    -> s_name varchar(50));_  
 
-**Load travel_agent.csv into table travel_agent,**
+**Load station.csv into table station,**
 
-_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/travel_agent.csv'  
-    -> into table travel_agent  
-    -> fields terminated by ','  
-    -> lines terminated by '\n'  
+_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/station.csv'  
+    -> into table station  
+    -> fields terminated  by ','  
+    -> lines terminated by '\r\n'  
     -> ignore 1 lines;_  
 
 **create table ticket,**
 
 _mysql> create table ticket(  
-    -> ticket_id varchar(20) primary key,  
+    -> ticket_id varchar(10) primary key,  
     -> date DATE,  
     -> time TIME,  
-    -> price INT, 
-    -> rid varchar(10)  
-    -> );_  
+    -> price int,  
+    -> r_id varchar(10));_  
 
 
 **Load ticket.csv into table ticket,**
@@ -220,55 +217,48 @@ _mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ticket.c
     -> lines terminated by '\n'  
     -> ignore 1 lines;_  
 
-**create table booking,**
+**create table train,**
 
-_mysql> create table booking(  
-    -> tid varchar(10),  
-    -> ticket_id varchar(20),  
-    -> ta_id varchar(10),  
-    -> p_id varchar(10),  
-    -> discount int,  
-    -> final_price int  
-    -> );_  
+_mysql> create table train(  
+    -> t_id varchar(10) primary key,  
+    -> capacity int,  
+    -> milage int);_  
 
 
-**Load booking.csv into table booking,**
+**Load train.csv into table train,**
 
-_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/booking.csv'  
-    -> into table booking  
-    -> fields terminated by ','  
-    -> lines terminated by '\n'  
+_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/train.csv'  
+    -> into table train  
+    -> fields terminated  by ','  
+    -> lines terminated by '\r\n'  
     -> ignore 1 lines;_  
 
-**Create table Passenger,**
+**Create table travel_agent,**
 
-_mysql> create table passenger(  
-    -> p_id varchar(10) primary key,  
-    -> p_name varchar(40),  
-    -> p_age int  
-    -> );_  
+_mysql> create table travel_agent(  
+    -> ta_id  varchar(10) primary  key,  
+    -> ta_name  varchar(50),  
+    -> commission int);_  
 
-**Load passenger.csv into table passenger,**
+**Load travel_agent.csv into table travel_agent,**
 
-_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/passenger.csv'  
-    -> into table passenger  
-    -> fields terminated by ','  
-    -> lines terminated by '\n'  
-    -> ignore 1 lines;_  
+_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/travel_agent.csv'  
+    -> into table travel_agent  
+    -> fields terminated  by ','  
+    -> lines terminated by '\r\n'  
+    -> ignore 1 lines;;_  
 
- **Create table daily_service,**
+ **Create table connect,**
 
-_mysql> CREATE TABLE daily_service (  
-    ->     sid varchar(10),  
-    ->     r_id varchar(10),  
-    ->     staff_id varchar(10),
-    ->	   date DATE,
-    -> );_  
+_mysql> create table connect(  
+    -> r_id varchar(10),  
+    -> start_station varchar(10),  
+    -> end_station varchar(10));_  
 
-**Load daily_service.csv file,**
+**Load connects.csv file,**
 
-_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/daily_service.csv'  
-    -> into table daily_service  
+_mysql> load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/connects.csv'  
+    -> into table connect  
     -> fields terminated by ','  
     -> lines terminated by '\n'  
     -> ignore 1 lines;_  
