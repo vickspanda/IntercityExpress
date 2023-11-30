@@ -313,7 +313,7 @@ _mysql> select * from train where t_id not in (select schedule.t_id from schedul
 _mysql> select t_id, count(ticket_id) from ticket where t_id in (select t_id from schedule where r_id in (select r_id from connect where start_station in (select station_id from station where s_name="dharwad") and end_station in (select station_id from station where s_name="benguluru")) and date between '2023-10-01' and '2023-10-31') group by t_id order by count(ticket_id) asc;_  
 
 **_For Question No. 3 of Set C:_**  
-_mysql> select route.r_id, count(*) as num from route, schedule, train, ticket where schedule.r_id = route.r_id and schedule.t_id = train.t_id and train.t_id = ticket.t_id group by route.r_id order by num desc limit 2;_  
+_mysql> select route.r_id, r.distance, r.time_taken, count(*) as num from route, schedule, train, ticket where schedule.r_id = route.r_id and schedule.t_id = train.t_id and train.t_id = ticket.t_id group by route.r_id order by num desc limit 2;_  
 
 **_For Question No. 4 of Set C:_**  
 _mysql> select * from passenger where p_id in (select p_id from booking group by p_id having count(p_id)>=1 order by count(p_id)) limit 5;_  
