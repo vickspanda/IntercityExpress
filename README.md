@@ -319,6 +319,7 @@ _mysql> select t_id, count(ticket_id) from ticket where t_id in (select t_id fro
 _mysql> select route.r_id, route.distance, route.time_taken, count(*) as num from route, schedule, train, ticket where schedule.r_id = route.r_id and schedule.t_id = train.t_id and train.t_id = ticket.t_id group by route.r_id order by num desc limit 2;;_  
 
 **_Question No. 4 of Set C: 4.	Display the details of the passengers who are frequent travellers with InterCity Express Trains. (Frequent traveller can be defined as the one who has travelled at least three times, irrespective of the route)_**  
+
 _mysql> select * from passenger where p_id in (select p_id from booking group by p_id having count(p_id)>=3 order by count(p_id)) limit 5;_  
 
 **_Question No. 5 of Set C: 5.	Display the details of trains which arrived late at their destination, more than once in this year; Include the driver and co-driver information in the output_**  
