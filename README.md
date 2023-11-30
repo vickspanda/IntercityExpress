@@ -305,20 +305,24 @@ _mysql> alter table ticket add foreign key (r_id) references route(r_id);_
 # IntercityExpress PART II
 
 _I have Completed the PART II of the Assignment by solving Set C of the Assignment_  
+ 
+**_Question No. 1 of Set C: List all trains not scheduled on 10th October this year._**  
 
-**_For Question No. 1 of Set C:_**  
 _mysql> select * from train where t_id not in (select schedule.t_id from schedule, train where date='2023-10-10' and schedule.t_id = train.t_id);_  
     
-**_For Question No. 2 of Set C:_**  
+**_Question No. 2 of Set C: List all fleets from Dharwad to Bengaluru, in ascending order of their monthly seats sold for the month of October this year._**  
+
 _mysql> select t_id, count(ticket_id) from ticket where t_id in (select t_id from schedule where r_id in (select r_id from connect where start_station in (select station_id from station where s_name="dharwad") and end_station in (select station_id from station where s_name="benguluru")) and date between '2023-10-01' and '2023-10-31') group by t_id order by count(ticket_id) asc;_  
 
-**_For Question No. 3 of Set C:_**  
+**_Question No. 3 of Set C: 3.	List the details of most popular route of InterCity Express Trains._**  
+
 _mysql> select route.r_id, route.distance, route.time_taken, count(*) as num from route, schedule, train, ticket where schedule.r_id = route.r_id and schedule.t_id = train.t_id and train.t_id = ticket.t_id group by route.r_id order by num desc limit 2;;_  
 
-**_For Question No. 4 of Set C:_**  
+**_Question No. 4 of Set C: 4.	Display the details of the passengers who are frequent travellers with InterCity Express Trains. (Frequent traveller can be defined as the one who has travelled at least three times, irrespective of the route)**  
 _mysql> select * from passenger where p_id in (select p_id from booking group by p_id having count(p_id)>=3 order by count(p_id)) limit 5;_  
 
-**_For Question No. 5 of Set C:_**  
+**_Question No. 5 of Set C: 5.	Display the details of trains which arrived late at their destination, more than once in this year; Include the driver and co-driver information in the output_**  
+
 _mysql> select s.t_id, train.milage, train.capacity , s.driver, s1.staff_name, s1.contact_no, s1.address, s.codriver, s2.staff_name, s2.contact_no, s2.address, count(s.t_id) from staff s1, staff s2, train, (select schedule.t_id, schedule.driver, schedule.codriver from schedule, route where route.r_id = schedule.r_id and schedule.actual_arrival_time>route.arrival_time) s where s1.staff_id = s.driver and s2.staff_id = s.codriver and s.t_id = train.t_id group by s.t_id, s.driver, s.codriver having count(s.t_id)>1;_  
 
 **_End of the Assignment_**
