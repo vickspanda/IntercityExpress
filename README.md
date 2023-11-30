@@ -51,7 +51,7 @@ Note: Bold means Primary Key.
 10.	booking (_ticket_id_, _ta_id_, _p_id_, discount, final_price)  
 11.	travel Agent (**ta_id**, ta_name, commission)
 12.	passenger(**p_id**, p_name, p_age)  
-13.	ticket (**ticket_id**, date, time, price, _r_id_)  
+13.	ticket (**ticket_id**, date, time, price, _t_id_)  
 
 
 To implement these Schemas. we need to follow the following commands in Mysql Command Line Client or Mysql can be accessed using Command Line Prompt after giving command "mysql -u root -p"  :
@@ -205,7 +205,7 @@ _mysql> create table ticket(
     -> date DATE,  
     -> time TIME,  
     -> price int,  
-    -> r_id varchar(10));_  
+    -> t_id varchar(10));_  
 
 
 **load ticket.csv into table ticket,**
@@ -310,42 +310,14 @@ _I have Completed the PART II of the Assignment by solving Set C of the Assignme
 _mysql> select * from train where t_id not in (select schedule.t_id from schedule, train where date='2023-10-10' and schedule.t_id = train.t_id);_  
     
 **_For Question No. 2 of Set C:_**  
-_mysql> SELECT T.*, COUNT(*) AS MonthlySeatsSold  
-    -> FROM Train T  
-    -> INNER JOIN Schedule S ON T.tid = S.tid  
-    -> INNER JOIN Route R ON S.rid = R.rid  
-    -> INNER JOIN Booking B ON S.sid = B.sid  
-    -> WHERE R.start_station = 'Dharwad' AND R.end_station = 'Bengaluru'  
-    -> AND B.date BETWEEN '2023-10-01' AND '2023-10-31'  
-    -> GROUP BY T.tid  
-    -> ORDER BY MonthlySeatsSold ASC;_  
+_mysql> select t_id, count(ticket_id) from ticket where t_id in (select t_id from schedule where r_id in (select r_id from connect where start_station in (select station_id from station where s_name="dharwad") and end_station in (select station_id from station where s_name="benguluru")) and date between '2023-10-01' and '2023-10-31') group by t_id order by count(ticket_id) asc;_  
 
 **_For Question No. 3 of Set C:_**  
-_mysql> SELECT R.*, COUNT(*) AS NumBookings  
-    -> FROM Route R  
-    -> INNER JOIN Schedule S ON R.rid = S.rid  
-    -> INNER JOIN Train T ON S.tid = T.tid  
-    -> INNER JOIN Booking B  ON T.tid = B.tid  
-    -> WHERE T.tid IN (  
-    -> SELECT tid  
-    -> FROM Train  
-    -> WHERE T.tid = B.tid  
-    -> )  
-    -> GROUP BY R.rid  
-    -> ORDER BY NumBookings DESC  
-    -> LIMIT 1;_  
+_mysql> select route.r_id, count(*) as num from route, schedule, train, ticket where schedule.r_id = route.r_id and schedule.t_id = train.t_id and train.t_id = ticket.t_id group by route.r_id order by num desc limit 2;_  
 
 **_For Question No. 4 of Set C:_**  
-_mysql> SELECT P.*  
-    -> FROM passenger P  
-    -> WHERE P.pid IN (  
-    -> SELECT B.pid  
-    -> FROM booking B  
-    -> INNER JOIN schedule S ON B.sid = S.sid  
-    -> INNER JOIN train T ON S.tid = T.tid  
-    -> WHERE T.tid = B.tid  
-    -> GROUP BY B.pid  
-    -> HAVING COUNT(*) >= 3  
-    -> );_  
+_mysql> select * from passenger where p_id in (select p_id from booking group by p_id having count(p_id)>=1 order by count(p_id)) limit 5;_  
+
+**_For Question No. 5 of Set C:_**
 
 **_End of the Assignment_**
