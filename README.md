@@ -318,7 +318,7 @@ _mysql> select route.r_id, r.distance, r.time_taken, count(*) as num from route,
 **_For Question No. 4 of Set C:_**  
 _mysql> select * from passenger where p_id in (select p_id from booking group by p_id having count(p_id)>=1 order by count(p_id)) limit 5;_  
 
-**_For Question No. 5 of Set C:_**
-_mysql> select s.t_id, train.milage, train.capacity , s.driver, s1.staff_name, s1.contact_no, s1.address, s.codriver, s2.staff_name, s2.contact_no, s2.address, count(s.t_id) from staff s1, staff s2, train, (select schedule.t_id, schedule.driver, schedule.codriver from schedule, route where route.r_id = schedule.r_id and schedule.actual_arrival_time>route.arrival_time) s where s1.staff_id = s.driver and s2.staff_id = s.codriver and s.t_id = train.t_id group by s.t_id, s.driver, s.codriver having count(s.t_id)>1;_
+**_For Question No. 5 of Set C:_**  
+_mysql> select s.t_id, train.milage, train.capacity , s.driver, s1.staff_name, s1.contact_no, s1.address, s.codriver, s2.staff_name, s2.contact_no, s2.address, count(s.t_id) from staff s1, staff s2, train, (select schedule.t_id, schedule.driver, schedule.codriver from schedule, route where route.r_id = schedule.r_id and schedule.actual_arrival_time>route.arrival_time) s where s1.staff_id = s.driver and s2.staff_id = s.codriver and s.t_id = train.t_id group by s.t_id, s.driver, s.codriver having count(s.t_id)>1;_  
 
 **_End of the Assignment_**
